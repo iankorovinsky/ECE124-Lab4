@@ -1,0 +1,165 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/ikorovin/ece-124/Lab4/simulation/qsim
+vhard_block
+Z1 !s110 1710896100
+!i10b 1
+!s100 hQ`ZZW`bga_mm:JF<fRWm2
+I;N7gMY_H4gB=h63ZRT2HK1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1710896100
+Z4 8LogicalStep_Lab4_top.vo
+Z5 FLogicalStep_Lab4_top.vo
+L0 3858
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1710896100.000000
+Z8 !s107 LogicalStep_Lab4_top.vo|
+Z9 !s90 -work|work|LogicalStep_Lab4_top.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vLogicalStep_Lab4_top
+R1
+!i10b 1
+!s100 Wz_A^bYle_Zhz6:=X[X^Z2
+IdnCJO;S0@4]_Za]:Kdblb1
+R2
+R0
+R3
+R4
+R5
+L0 31
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@logical@step_@lab4_top
+Elogicalstep_lab4_top
+Z12 w1711143397
+Z13 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 7d5Xo;QBOkc31OfQTzSXV0
+Z14 DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 IfY7Mh2WPBc;@7U@3<I^[0
+Z15 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z16 DPx6 altera 11 dffeas_pack 0 22 :S1C`o89Vbe5bV6`:6CaB3
+Z17 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z18 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z19 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z20 DPx6 altera 28 altera_primitives_components 0 22 z?[99Tn<@QGNik3V1c6ah1
+R0
+Z21 8LogicalStep_Lab4_top.vho
+Z22 FLogicalStep_Lab4_top.vho
+l0
+L36
+VZOSG6o8?3GLkM4lbla;<H0
+!s100 2I`OITOQam:Oh2JSV:>Rc0
+Z23 OV;C;10.5b;63
+32
+Z24 !s110 1711143397
+!i10b 1
+Z25 !s108 1711143397.000000
+Z26 !s90 -work|work|LogicalStep_Lab4_top.vho|
+Z27 !s107 LogicalStep_Lab4_top.vho|
+!i113 1
+R10
+Z28 tExplicit 1 CvgOpt 0
+Astructure
+R13
+R14
+R15
+R16
+R17
+R18
+R19
+R20
+DEx4 work 20 logicalstep_lab4_top 0 22 ZOSG6o8?3GLkM4lbla;<H0
+l251
+L57
+Vd0A`81Ff_CDPd86L:Ca3`0
+!s100 7oR=@ILY`l;_;lSHKdhMJ0
+R23
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 1
+R10
+R28
+Elogicalstep_lab4_top_vhd_vec_tst
+Z29 w1711143396
+R18
+R19
+R0
+Z30 8Waveform2.vwf.vht
+Z31 FWaveform2.vwf.vht
+l0
+L31
+VK9oOEMLJ37gJ1:KAQm>3M1
+!s100 @X4ZP>3]PPC6GM;>;02fc3
+R23
+32
+R24
+!i10b 1
+R25
+Z32 !s90 -work|work|Waveform2.vwf.vht|
+Z33 !s107 Waveform2.vwf.vht|
+!i113 1
+R10
+R28
+Alogicalstep_lab4_top_arch
+R18
+R19
+Z34 DEx4 work 32 logicalstep_lab4_top_vhd_vec_tst 0 22 K9oOEMLJ37gJ1:KAQm>3M1
+l72
+L33
+VP2mc26oV1`0JK@=<;U82J3
+!s100 EO?>HcmaOm`h]1A@a>Mnd1
+R23
+32
+R24
+!i10b 1
+R25
+R32
+R33
+!i113 1
+R10
+R28
+vLogicalStep_Lab4_top_vlg_vec_tst
+R1
+!i10b 1
+!s100 KCU;2UEJ4Gz57f7ODgk`[2
+IU_K5U<6FWU@VS]85k;Toc1
+R2
+R0
+w1710896099
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+L0 29
+R6
+r1
+!s85 0
+31
+R7
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R10
+R11
+n@logical@step_@lab4_top_vlg_vec_tst
