@@ -1,6 +1,6 @@
 -- Members: Ian Korovinsky and Steven Yang | Lab4_REPORT | LS206 | Group 17
 
--- Import package
+-- Import packages
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -9,15 +9,15 @@ entity synchronizer is
   port (
     clk   : in  std_logic; -- Clock input
     reset : in  std_logic; -- Reset input
-    din   : in  std_logic; -- Input bit
-    dout  : out std_logic -- Output bit
+    din   : in  std_logic; -- Input data bit
+    dout  : out std_logic -- Output data bit
   );
 end synchronizer;
 
 -- Defines the logic of the synchronizer circuit
 architecture circuit of synchronizer is
   
-  -- Signal to keep track of synchronizer register contents
+  -- Signal (2-bit vector) to keep track of synchronizer register contents
   signal sreg : std_logic_vector(1 downto 0);
 
 begin
@@ -30,12 +30,12 @@ begin
 		-- If reset is active then reset the register contents both to 0
 		if reset = '1' then
 			sreg <= "00";
-		-- If reset is not active the shift the register (D flip-flop) contents to the right
+		-- If reset is not active the shift the register (D flip-flop) contents to one to the right
 		else
 			sreg(1) <= sreg(0); -- Shifts from first register to second
-			sreg(0) <= din; -- Takes the input and assigns it to the first register
+			sreg(0) <= din; -- Takes the data input and assigns it to the first register
 		end if;
 	end if;
 	end process synced_process;
-	dout <= sreg(1); -- Assigns the last register contents to the circuit output
+	dout <= sreg(1); -- Assigns the second register contents to the circuit data output
 end circuit;

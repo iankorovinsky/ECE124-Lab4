@@ -28,15 +28,15 @@ SIGNAL current_state, next_state	:  STATE_NAMES;     	-- signals of type STATE_N
 
 BEGIN
 
--- Register process updates with respect to changes in the clock
+-- Register process, updates with respect to changes in the clock
 Register_Section: PROCESS (clk_input)  
 BEGIN
 	-- Reacts on the rising edge of the clock
 	IF(rising_edge(clk_input)) THEN
-		-- If reset is active, reset state back to first state
+		-- If reset is active, reset state back to first state (S0)
 		IF (reset = '1') THEN
 			current_state <= S0;
-		-- If reset is not active and state machine is enable, current state transitions to next state
+		-- If reset is not active and state machine is enabled, current state transitions to next state
 		ELSIF (reset = '0' and sm_clken = '1') THEN
 			current_state <= next_State;
 		END IF;
@@ -45,11 +45,11 @@ END PROCESS;
 
 
 
--- Transition process updates with respect to the changes in current_state
+-- Transition process, updates with respect to the changes in current_state
 Transition_Section: PROCESS (current_state) 
 
 BEGIN
-  -- Case blocks to define the transition between states depending on order and variable values
+  -- Case block to define the transition between states depending on order and variable values
   CASE current_state IS
         -- Either advances chronologically or skips to S6 (EW amber state) if EW request is activated by pedestrian and NS request is not active
   		WHEN S0 =>
@@ -110,7 +110,7 @@ BEGIN
  END PROCESS;
  
 
--- Decoder process updates with respect to the changes in current_state
+-- Decoder process, updates with respect to the changes in current_state
 Decoder_Section: PROCESS (current_state) 
 
 BEGIN
@@ -142,7 +142,7 @@ BEGIN
 			ew_amber <= '0';
 			ew_red <= '1';
 			ew_crossing <= '0';
-		-- Assigns amber signal for NS and red signal for EW and activates NS request clear
+		-- Assigns amber signal for NS and red signal for EW, and activates NS request clear
         WHEN S6 =>	
 			ns_clear <= '1';
 			ns_green <= '0';

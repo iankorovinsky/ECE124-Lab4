@@ -25,12 +25,12 @@ BEGIN
 -- Evaluates input logic and assigns it to the d signal
 d <= (sreg OR din) AND (NOT(reset OR register_clr));
 
--- Process which activates based on changes in clock, responsible for the syncing on the holding register
+-- Process which activates based on changes in clock, responsible for the syncing of the holding register
 synced_system : process(clk)
 	BEGIN
-		-- If the clock is on the rising edge, then proceed
+		-- If the clock is on the rising edge, then proceed with signal & output assignment
 		if (rising_edge(clk)) then
-			-- Assigns d to register and data output
+			-- Assigns d to the register signal and the data output bit
 			sreg <= d;
 			dout <= d;
 		end if;

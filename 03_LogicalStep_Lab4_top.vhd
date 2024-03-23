@@ -4,7 +4,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
--- Declares the top file input and output bits/vectors
+-- Declares the top file/overall circuit input and output bits/vectors
 ENTITY LogicalStep_Lab4_top IS
    PORT
 	(
@@ -42,7 +42,7 @@ ARCHITECTURE SimpleCircuit OF LogicalStep_Lab4_top IS
 			sim_mode			: in boolean; -- Boolean for simulation true/false status
 			reset				: in std_logic; -- Input reset bit
             clkin      		    : in  std_logic; -- Clock input bit
-			sm_clken			: out	std_logic; -- Clock enable bit
+			sm_clken			: out	std_logic; -- Clock enable output bit
 			blink		  		: out std_logic -- Blink output bit
   );
    end component;
@@ -50,10 +50,10 @@ ARCHITECTURE SimpleCircuit OF LogicalStep_Lab4_top IS
    -- Defines the pb filter component
     component pb_filters port (
 			clkin				: in std_logic; -- Input clock bit
-			rst_n				: in std_logic; -- Inverted reset input bit
-			rst_n_filtered	    : out std_logic; -- Filtered inverted reset output bit
-			pb_n				: in  std_logic_vector (3 downto 0); -- Inverted button input 4-bit vector
-			pb_n_filtered	    : out	std_logic_vector(3  downto 0) -- Filtered inverted button output 4-bit vector							 
+			rst_n				: in std_logic; -- Reset input bit (active low)
+			rst_n_filtered	    : out std_logic; -- Filtered reset output bit (active low)
+			pb_n				: in  std_logic_vector (3 downto 0); -- Button input 4-bit vector (active low)
+			pb_n_filtered	    : out	std_logic_vector(3  downto 0) -- Filtered button output 4-bit vector (active low)							 
  );
    end component;
 
@@ -70,8 +70,8 @@ ARCHITECTURE SimpleCircuit OF LogicalStep_Lab4_top IS
 	component synchronizer port(
 			clk					: in std_logic; -- Clock input
 			reset					: in std_logic; -- Reset input
-			din					: in std_logic; -- Input bit
-			dout					: out std_logic -- Output bit
+			din					: in std_logic; -- Input data bit
+			dout					: out std_logic -- Output data bit
   );
    end component; 
 
@@ -103,8 +103,8 @@ ARCHITECTURE SimpleCircuit OF LogicalStep_Lab4_top IS
 	SIGNAL pb_n_filtered, pb							: std_logic_vector(3 downto 0);  -- For holding the button values
 	SIGNAL ew_req, ns_req					: std_logic; -- For holding the crossing requests
 	SIGNAL ns_green, ns_amber, ns_red, ew_green, ew_amber, ew_red : std_logic; -- For holding the traffic light values
-	SIGNAL ns_crossing, ew_crossing : std_logic; -- For holding the active crossing state values
-	SIGNAL NSLIGHTS, EWLIGHTS	: std_logic_vector(6 downto 0); -- For holding the overall constructed traffic digit value
+	SIGNAL ns_crossing, ew_crossing : std_logic; -- For holding the active crossing values
+	SIGNAL NSLIGHTS, EWLIGHTS	: std_logic_vector(6 downto 0); -- For holding the overall concatenated traffic digit value
 	SIGNAL ns_clear, ew_clear : std_logic; -- For holding the pedestrian request clear signals
 	SIGNAL ew_out, ns_out : std_logic; -- For holding the traffic light outputs
 	
@@ -121,7 +121,7 @@ INST1: pb_inverters		port map (rst_n_filtered, rst, pb_n_filtered, pb);
 -- Used to generate the clock signal
 INST3: clock_generator 	port map (sim_mode, synch_rst, clkin_50, sm_clken, blink_sig);
 
--- Used to activate the synchronizer which generates the synchronous reset signal
+-- Used for the synchronizer which generates the synchronous reset signal
 INSTMID: synchronizer port map (clkin_50, synch_rst, rst, synch_rst);
 
 -- Synchronizer and holding register for the EW traffic light
