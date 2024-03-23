@@ -28,76 +28,74 @@ ARCHITECTURE SimpleCircuit OF LogicalStep_Lab4_top IS
    
 	-- Defines the segment7_mux component
 	component segment7_mux port (
-             clk        	: in  	std_logic := '0';
+             clk        	: in  	std_logic := '0'; -- Input, clock-style
 			 DIN2 			: in  	std_logic_vector(6 downto 0);	--bits 6 to 0 represent segments G,F,E,D,C,B,A
 			 DIN1 			: in  	std_logic_vector(6 downto 0); --bits 6 to 0 represent segments G,F,E,D,C,B,A
-			 DOUT			: out	std_logic_vector(6 downto 0);
-			 DIG2			: out	std_logic;
-			 DIG1			: out	std_logic
+			 DOUT			: out	std_logic_vector(6 downto 0); -- Output, 7 bit vector
+			 DIG2			: out	std_logic; -- Output, 1 bit relating to digit 2
+			 DIG1			: out	std_logic -- Output, 1 bit relating to digit 1
    );
    end component;
 
    -- Defines the clock generator component
    component clock_generator port (
-			sim_mode			: in boolean;
-			reset				: in std_logic;
-            clkin      		    : in  std_logic;
-			sm_clken			: out	std_logic;
-			blink		  		: out std_logic
+			sim_mode			: in boolean; -- Boolean for simulation true/false status
+			reset				: in std_logic; -- Input reset bit
+            clkin      		    : in  std_logic; -- Clock input bit
+			sm_clken			: out	std_logic; -- Clock enable bit
+			blink		  		: out std_logic -- Blink output bit
   );
    end component;
 
    -- Defines the pb filter component
     component pb_filters port (
-			clkin				: in std_logic;
-			rst_n				: in std_logic;
-			rst_n_filtered	    : out std_logic;
-			pb_n				: in  std_logic_vector (3 downto 0);
-			pb_n_filtered	    : out	std_logic_vector(3 downto 0)							 
+			clkin				: in std_logic; -- Input clock bit
+			rst_n				: in std_logic; -- Inverted reset input bit
+			rst_n_filtered	    : out std_logic; -- Filtered inverted reset output bit
+			pb_n				: in  std_logic_vector (3 downto 0); -- Inverted button input 4-bit vector
+			pb_n_filtered	    : out	std_logic_vector(3  downto 0) -- Filtered inverted button output 4-bit vector							 
  );
    end component;
 
    -- Defines the pb inverter component
 	component pb_inverters port (
-			rst_n				: in  std_logic;
-			rst				    : out	std_logic;							 
-			pb_n_filtered	    : in  std_logic_vector (3 downto 0);
-			pb					: out	std_logic_vector(3 downto 0)							 
+			rst_n				: in  std_logic; -- Input reset bit
+			rst				    : out	std_logic; -- Output reset bit (inverted)							 
+			pb_n_filtered	    : in  std_logic_vector (3 downto 0); -- Input 4 bit button vector
+			pb					: out	std_logic_vector(3 downto 0) -- Output 4 bit vector corresponding to inverted buttons							 
   );
    end component;
 	
    -- Defines the synchronizer component
 	component synchronizer port(
-			clk					: in std_logic;
-			reset					: in std_logic;
-			din					: in std_logic;
-			dout					: out std_logic
+			clk					: in std_logic; -- Clock input
+			reset					: in std_logic; -- Reset input
+			din					: in std_logic; -- Input bit
+			dout					: out std_logic -- Output bit
   );
    end component; 
 
    -- Defines the holding register component
   component holding_register port (
-			clk					: in std_logic;
-			reset					: in std_logic;
-			register_clr		: in std_logic;
-			din					: in std_logic;
-			dout					: out std_logic
+			clk					: in std_logic; -- Input bit for clock
+			reset					: in std_logic; -- Input bit for reset
+			register_clr		: in std_logic; -- Input bit for register clear
+			din					: in std_logic; -- Input bit for data input
+			dout					: out std_logic -- Output bit for data output
   );
   end component;
 
   -- Defines the state machine component
 	component State_Machine port (
-		clk_input, reset, sm_clken, blink_sig, ns_request, ew_request			: IN std_logic;
-		ns_green, ns_amber, ns_red, ew_green, ew_amber, ew_red						: OUT std_logic;
-		ns_crossing, ew_crossing	: OUT std_logic;
-		fourbit_state_number : OUT std_logic_vector(3 downto 0);
-		ns_clear, ew_clear : OUT std_logic
-
+		clk_input, reset, sm_clken, blink_sig, ns_request, ew_request			: IN std_logic; -- Input bits for clock, reset, enable, blink signal, and pedestrian requests
+		ns_green, ns_amber, ns_red, ew_green, ew_amber, ew_red						: OUT std_logic; -- Output bits for the red, amber and green traffic lights (0 when not-active, 1 when light is active), for both NS and EW directions
+		ns_crossing, ew_crossing	: OUT std_logic; -- Output bits to symbolize crossing periods
+		fourbit_state_number : OUT std_logic_vector(3 downto 0); -- Output logic vector to represent state (unsigned decimal) as a binary number
+		ns_clear, ew_clear : OUT std_logic -- Output bits to clear pedestrian requests
 	);
 	end component;
 ----------------------------------------------------------------------------------------------------
-	CONSTANT	sim_mode								: boolean := TRUE;  -- set to FALSE for LogicalStep board downloads
-	-- set to TRUE for SIMULATIONS
+	CONSTANT	sim_mode								: boolean := TRUE;  -- set to FALSE for LogicalStep board downloads, set to TRUE for SIMULATIONS
 	
 	-- All of the signals are defined below
 	SIGNAL rst, rst_n_filtered, synch_rst			    : std_logic; -- For holding reset values
